@@ -1,0 +1,9 @@
+(page "index.html")
+
+(html
+  (head
+    (link :rel "stylesheet" :type "text/css" :href "screen.css")
+    (title "Hoplon with Garden"))
+  (body
+    (h1 "Hoplon with Garden")
+    (p "If this text is sans, we're in business!")))
