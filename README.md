@@ -12,7 +12,7 @@ Example of using [lein-garden](https://github.com/noprompt/lein-garden) with Hop
 1. Start the CSS and Hoplon auto-compilers
 
 ```bash
-$ boot watch [lein \'garden \'once] hoplon
+$ boot watch garden hoplon
 ```
 
 2. Open the compiled html file.
