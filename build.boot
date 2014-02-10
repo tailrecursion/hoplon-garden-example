@@ -41,10 +41,8 @@
 
 (deftask garden
   []
-  (set-env!
-    :out-path "resources/public"
-    :garden   '[{:stylesheet garden.css/screen
-                 :compiler   {:pretty-print? false}}])
+  (set-env! :garden '[{:stylesheet garden.css/screen
+                       :compiler   {:pretty-print? false}}])
   (add-sync! (get-env :out-path) [html-out])
   (garden-build))
 
