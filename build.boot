@@ -12,10 +12,12 @@
  :garden       '[{:stylesheet garden.css/screen
                   :compiler {:pretty-print? false}}])
 
-(require '[tailrecursion.hoplon.boot :refer :all]
-         '[garden.compiler           :refer [compile-css]]
-         '[clojure.java.io           :as    io]
-         '[tailrecursion.boot.core   :as    boot])
+(require
+  '[garden.compiler           :refer [compile-css]]
+  '[clojure.java.io           :as    io]
+  '[tailrecursion.boot.core   :as    boot])
+
+(def html-out "resources/html")
 
 (defn garden-compile
   [{:keys [stylesheet compiler] :as build}]
@@ -30,9 +32,24 @@
      (assoc compiler :output-to out-file)
      @(resolve stylesheet))))
 
-(deftask garden [& opts]
+(defn garden-build [& opts]
   (fn [continue]
     (fn [event]
       (when-let [builds (get-env :garden)]
         (doseq [build builds] (garden-compile build)))
       (continue event))))
+
+(deftask garden
+  []
+  (set-env!
+    :out-path "resources/public"
+    :garden   '[{:stylesheet garden.css/screen
+                 :compiler   {:pretty-print? false}}])
+  (add-sync! (get-env :out-path) [html-out])
+  (garden-build))
+
+(deftask hoplon
+  [& [opts]]
+  (set-env! :out-path html-out)
+  (require '[tailrecursion.hoplon.boot :as h])
+  (apply h/hoplon [opts]))

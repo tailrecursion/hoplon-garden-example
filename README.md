@@ -9,17 +9,22 @@ Example of using [lein-garden](https://github.com/noprompt/lein-garden) with Hop
 
 ## Usage
 
-1. Start the CSS and Hoplon auto-compilers
+1. Start the Hoplon auto-compiler
 
 ```bash
-$ boot watch garden hoplon
+$ boot watch hoplon
 ```
 
-2. Open the compiled html file.
+2. Start the Garden CSS auto-compiler in another tab
 
 ```bash
-$ cd resources/public
-$ open index.html
+$ boot watch garden
+```
+
+3. Open the compiled html file.
+
+```bash
+$ open resources/public/index.html
 ```
 
 [1]: https://github.com/tailrecursion/boot
